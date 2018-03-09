@@ -5,10 +5,10 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import UpdateView, ListView
 from django.utils import timezone
 from django.utils.decorators import method_decorator
-
+from django.urls import reverse_lazy
 from .forms import NewTopicForm, PostForm
 from .models import Board, Post, Topic
-
+from django.contrib.auth.models import User
 
 class BoardListView(ListView):
     model = Board
@@ -105,3 +105,4 @@ class PostUpdateView(UpdateView):
         post.updated_at = timezone.now()
         post.save()
         return redirect('topic_posts', pk=post.topic.board.pk, topic_pk=post.topic.pk)
+
